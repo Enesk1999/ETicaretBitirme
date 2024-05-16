@@ -29,26 +29,68 @@ namespace ETicaretWebUI.Controllers
             {
                 applicationDbContext.Add(kategori);
                 applicationDbContext.SaveChanges();
+                TempData["basarili"] = kategori.Name + " " +"Başarılı bir şekilde eklendi";
                 return RedirectToAction("Index");
             }
 
             return View(kategori);
         }
-        public IActionResult Edit()
+        [HttpGet]
+        public IActionResult Edit(int? id)
         {
-            return View();
+            if(id ==null || id == 0)
+            {
+                return NotFound();
+            }
+            Category categoryVeri = applicationDbContext.Categoriler.Find(id);
+            if(categoryVeri == null)
+            {
+                return NotFound();
+            }
+            return View(categoryVeri);
         }
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
-        public IActionResult Delete()
+        [HttpPost]
+        public IActionResult Edit(Category kategori)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                applicationDbContext.Update(kategori);
+                applicationDbContext.SaveChanges();
+                TempData["basarili"] = kategori.Name + " " + "Başarılı bir şekilde güncellendi";
+
+                return RedirectToAction("Index");
+
+            }
+            return View(kategori);
         }
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            if(id ==null || id == 0)
+            {
+                return NotFound();
+            }
+            Category? categoryDb = applicationDbContext.Categoriler.Find(id);
+            if(categoryDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryDb);
+
+            
+        }
+        [HttpPost]
+        public IActionResult Delete(Category kategori)
+        {
+            if (kategori != null) 
+            {
+                applicationDbContext.Categoriler.Remove(kategori);
+                applicationDbContext.SaveChanges();
+                TempData["basarili"] ="Başarılı bir şekilde Kaldırıldı";
+                return RedirectToAction("Index");
+            
+            }
+            return View(kategori);
+        }
     }
 }
