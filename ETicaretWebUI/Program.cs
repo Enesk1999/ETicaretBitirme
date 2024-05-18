@@ -1,3 +1,4 @@
+using ETicaret.Data.Repository;
 using ETicaretWebUI.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,7 @@ builder.Services.AddControllersWithViews();
 //App Dbcontext Ekleme
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddScoped<ICategoryRepository , CategoryRepository>();
 
 
 

@@ -1,4 +1,5 @@
-﻿using ETicaretWebUI.Models;
+﻿
+using ETicaret.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace ETicaretWebUI.Data

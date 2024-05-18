@@ -19,4 +19,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ETicaret.Data\ETicaret.Data.csproj" />
+    <ProjectReference Include="..\ETicaret.Model\ETicaret.Model.csproj" />
+    <ProjectReference Include="..\ETicaret.Utility\ETicaret.Utility.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace ETicaretWebUI.Models
+namespace ETicaret.Model
 {
     public class Category
     {

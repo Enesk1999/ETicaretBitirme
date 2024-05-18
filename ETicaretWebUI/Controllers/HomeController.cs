@@ -1,4 +1,4 @@
-using ETicaretWebUI.Models;
+using ETicaret.Model;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
