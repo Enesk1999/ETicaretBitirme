@@ -16,10 +16,6 @@ namespace ETicaret.Data.Repository
             applicationDbContext = rr;
         }
 
-        public void Save()
-        {
-            applicationDbContext.SaveChanges();
-        }
 
         public void Update(Category category)
         {

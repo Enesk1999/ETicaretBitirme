@@ -7,14 +7,14 @@ namespace ETicaretWebUI.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategoryRepository categoryRepository;
-        public CategoryController(ICategoryRepository categoryRepository)
+        private readonly IUnitOfWork unitOfWork;
+        public CategoryController(IUnitOfWork unit)
         {
-            this.categoryRepository =categoryRepository ;
+            unitOfWork = unit ;
         }
         public IActionResult Index()
         {
-            List<Category> getirTumKategoriler = categoryRepository.GetAll().ToList();
+            List<Category> getirTumKategoriler = unitOfWork.Category.GetAll().ToList();
             return View(getirTumKategoriler);
         }
 
@@ -28,8 +28,8 @@ namespace ETicaretWebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                categoryRepository.Add(kategori);
-                categoryRepository.Save();
+                unitOfWork.Category.Add(kategori);
+                unitOfWork.Save();
                 TempData["basarili"] = kategori.Name + " " +"Başarılı bir şekilde eklendi";
                 return RedirectToAction("Index");
             }
@@ -43,7 +43,7 @@ namespace ETicaretWebUI.Controllers
             {
                 return NotFound();
             }
-            Category degistirilecekId = categoryRepository.Get(x => x.Id == id);
+            Category degistirilecekId = unitOfWork.Category.Get(x => x.Id == id);
             if(degistirilecekId == null)
             {
                 return NotFound();
@@ -55,8 +55,8 @@ namespace ETicaretWebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                categoryRepository.Update(kategori);
-                categoryRepository.Save();
+                unitOfWork.Category.Update(kategori);
+                unitOfWork.Save();
                 TempData["basarili"] = kategori.Name + " " + "Başarılı bir şekilde güncellendi";
 
                 return RedirectToAction("Index");
@@ -71,7 +71,7 @@ namespace ETicaretWebUI.Controllers
             {
                 return NotFound();
             }
-            Category? getirSilinecekId = categoryRepository.Get(x=>x.Id ==id);
+            Category? getirSilinecekId = unitOfWork.Category.Get(x=>x.Id ==id);
             if(getirSilinecekId == null)
             {
                 return NotFound();
@@ -85,8 +85,8 @@ namespace ETicaretWebUI.Controllers
         {
             if (kategori != null) 
             {
-                categoryRepository.Remove(kategori);
-                categoryRepository.Save();
+                unitOfWork.Category.Remove(kategori);
+                unitOfWork.Save();
                 TempData["basarili"] ="Başarılı bir şekilde Kaldırıldı";
                 return RedirectToAction("Index");
             
