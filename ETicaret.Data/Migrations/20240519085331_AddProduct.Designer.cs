@@ -3,6 +3,7 @@ using ETicaretWebUI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ETicaretWebUI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240519085331_AddProduct")]
+    partial class AddProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,32 +104,6 @@ namespace ETicaretWebUI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Author = "WEET8998",
-                            Description = "Kumaş Baggy Pantolon İndigo ST00122-Siyah",
-                            ISBN = "ST00122-Siyah",
-                            ListPrice = 550.99000000000001,
-                            Price = 529.99000000000001,
-                            Price100 = 500.0,
-                            Price50 = 509.99000000000001,
-                            Title = "Kumaş Baggy Pantolon"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Author = "STRE6655",
-                            Description = "Studios Ltd. United Kingdom Oversize T-Shirt Beyaz",
-                            ISBN = "ST00275-Beyaz",
-                            ListPrice = 449.99000000000001,
-                            Price = 429.99000000000001,
-                            Price100 = 400.0,
-                            Price50 = 410.99000000000001,
-                            Title = "United Kingdom Oversize"
-                        });
                 });
 #pragma warning restore 612, 618
         }

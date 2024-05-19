@@ -25,20 +25,21 @@ namespace ETicaretWebUI.Data
             
                 );
             modelBuilder.Entity<Product>().HasData(
-                new Product { 
-                    Id=1 , 
-                    Title= "Kumaş Baggy Pantolon", 
-                    Author="WEET8998", 
-                    Description= "Kumaş Baggy Pantolon İndigo ST00122-Siyah",
-                    ISBN= "ST00122-Siyah", 
-                    ListPrice=550.99,
-                    Price=529.99,
-                    Price50= 509.99,
+                new Product
+                {
+                    Id = 1,
+                    Title = "Kumaş Baggy Pantolon",
+                    Author = "WEET8998",
+                    Description = "Kumaş Baggy Pantolon İndigo ST00122-Siyah",
+                    ISBN = "ST00122-Siyah",
+                    ListPrice = 550.99,
+                    Price = 529.99,
+                    Price50 = 509.99,
                     Price100 = 500
                 },
                  new Product
                  {
-                     Id = 1,
+                     Id = 2,
                      Title = "United Kingdom Oversize",
                      Author = "STRE6655",
                      Description = "Studios Ltd. United Kingdom Oversize T-Shirt Beyaz",

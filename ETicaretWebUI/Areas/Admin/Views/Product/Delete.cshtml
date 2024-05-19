@@ -1,0 +1,38 @@
+﻿@model Product 
+
+<div class="p-4 shadow border-1 mt-4 mb-5">
+    <div class="row pb-2">
+        <h2 class="text-primary">Ürün Kaldır</h2>
+        
+    </div>
+    <form method="post">
+        <dl>
+            <div class=" p-4 fs-4">
+                <dt>Ürün Id</dt>
+                <dd>@Model.Id</dd>
+                <hr />
+                <dt>Ürün Adı</dt>
+                <dd>@Model.Title</dd>
+                <hr />
+                <dt>Ürün Ekleyen</dt>
+                <dd>@Model.Author</dd>
+                <dt>Ürün Kod</dt>
+                <dd>@Model.ISBN</dd>
+                <dt>Ürün Açıklama</dt>
+                <dd>@Model.Description</dd>
+                <dt>Ürün Fiyat</dt>
+                <dd>@Model.ListPrice</dd>
+                
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <button class="btn btn-danger" type="submit">Ürünü Kaldır</button>
+                </div>
+                <div class="col-3">
+                    <a class="btn btn-primary" asp-controller="Product" asp-action="Index">Anasayfaya Dön</a>
+
+                </div>
+            </div>
+        </dl>
+    </form>
+</div>
