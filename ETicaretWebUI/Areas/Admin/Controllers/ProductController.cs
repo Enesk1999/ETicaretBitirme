@@ -3,6 +3,7 @@ using ETicaret.Model;
 using ETicaret.Model.Models;
 using ETicaretWebUI.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ETicaretWebUI.Areas.Admin.Controllers
 {
@@ -23,6 +24,12 @@ namespace ETicaretWebUI.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            IEnumerable<SelectListItem> kategoriListesi = unitOfWork.Category.GetAll().ToList().Select(x => new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            });
+            ViewBag.CategoryListe = kategoriListesi;
             return View();
         }
         [HttpPost]

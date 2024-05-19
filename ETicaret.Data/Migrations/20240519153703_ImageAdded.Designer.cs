@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ETicaretWebUI.Migrations
+namespace ETicaret.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240519094102_AddProductSeedDatass")]
-    partial class AddProductSeedDatass
+    [Migration("20240519153703_ImageAdded")]
+    partial class ImageAdded
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,12 +77,18 @@ namespace ETicaretWebUI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ISBN")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("ListPrice")
@@ -103,6 +109,8 @@ namespace ETicaretWebUI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Products");
 
                     b.HasData(
@@ -110,6 +118,7 @@ namespace ETicaretWebUI.Migrations
                         {
                             Id = 1,
                             Author = "WEET8998",
+                            CategoryId = 1,
                             Description = "Kumaş Baggy Pantolon İndigo ST00122-Siyah",
                             ISBN = "ST00122-Siyah",
                             ListPrice = 550.99000000000001,
@@ -122,6 +131,7 @@ namespace ETicaretWebUI.Migrations
                         {
                             Id = 2,
                             Author = "STRE6655",
+                            CategoryId = 2,
                             Description = "Studios Ltd. United Kingdom Oversize T-Shirt Beyaz",
                             ISBN = "ST00275-Beyaz",
                             ListPrice = 449.99000000000001,
@@ -130,6 +140,17 @@ namespace ETicaretWebUI.Migrations
                             Price50 = 410.99000000000001,
                             Title = "United Kingdom Oversize"
                         });
+                });
+
+            modelBuilder.Entity("ETicaret.Model.Models.Product", b =>
+                {
+                    b.HasOne("ETicaret.Model.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

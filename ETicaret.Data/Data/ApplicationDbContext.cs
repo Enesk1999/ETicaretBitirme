@@ -35,7 +35,8 @@ namespace ETicaretWebUI.Data
                     ListPrice = 550.99,
                     Price = 529.99,
                     Price50 = 509.99,
-                    Price100 = 500
+                    Price100 = 500,
+                    CategoryId =1,
                 },
                  new Product
                  {
@@ -47,7 +48,8 @@ namespace ETicaretWebUI.Data
                      ListPrice = 449.99,
                      Price = 429.99,
                      Price50 = 410.99,
-                     Price100 = 400
+                     Price100 = 400,
+                     CategoryId =2,
                  }
 
 
