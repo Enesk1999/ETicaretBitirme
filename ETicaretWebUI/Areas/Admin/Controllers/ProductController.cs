@@ -174,7 +174,7 @@ namespace ETicaretWebUI.Areas.Admin.Controllers
         #region API CALLS
         public IActionResult GetAllJSON(int id)
         {
-            List<Product> products = unitOfWork
+            return View();
         }
         #endregion
     }
