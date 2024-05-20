@@ -18,7 +18,7 @@ namespace ETicaret.Data.Repository
 
         public void Update(Product product)
         {
-            applicationDbContext.Update(product);
+            applicationDbContext.Products.Update(product);
         }
     }
 }
