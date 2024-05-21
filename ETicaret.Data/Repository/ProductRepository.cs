@@ -1,5 +1,6 @@
 ﻿using ETicaret.Model.Models;
 using ETicaretWebUI.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +21,6 @@ namespace ETicaret.Data.Repository
         {
             applicationDbContext.Products.Update(product);
         }
+     
     }
 }

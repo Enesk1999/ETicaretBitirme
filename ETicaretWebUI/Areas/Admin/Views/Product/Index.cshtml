@@ -1,4 +1,7 @@
-﻿@model List<Product>
+﻿@{
+    Layout = "_Layout";
+}
+@model List<Product>
 
 
 
@@ -16,8 +19,8 @@
             </div>
         </div>
     </div>
-   <div class="mb-5">
-        <table class="table table-bordered table-striped table-hover shadow-lg">
+   <div class="mb-5 mt-3">
+        <table id="tbl" class="table table-bordered table-striped table-hover shadow-lg">
             <thead>
                 <tr>
                     <th>Ürün Resim</th>
@@ -27,14 +30,15 @@
                     <th>Ürün ListeFiyat</th>
                     <th>Kategori</th>
                     <th></th>
-                    <th></th>
+                 
+                   
                     
                     
                    
                 </tr>
 
             </thead>
-            <tbody>
+           @*  <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
@@ -56,7 +60,11 @@
                     </tr>
 
                 }
-            </tbody>
+            </tbody> *@
         </table>
    </div>
+}
+
+@section Scripts{
+    <script src="~/js/product.js"></script>
 }

@@ -27,6 +27,7 @@ namespace ETicaretWebUI.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            //ViewBag ile çağırma
             //IEnumerable<SelectListItem> kategoriListesi = unitOfWork.Category.GetAll().ToList().Select(x => new SelectListItem
             //{
             //    Text = x.Name,
@@ -172,9 +173,30 @@ namespace ETicaretWebUI.Areas.Admin.Controllers
 
         //API İŞLEMLERİ İÇİN JSON FORMAT RETURN
         #region API CALLS
-        public IActionResult GetAllJSON(int id)
+        public IActionResult GetAll(int? id)
         {
-            return View();
+            List<Product> TumUrunleriGetirFormatJson = unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+            return Json(new {data =TumUrunleriGetirFormatJson});
+        }
+        [HttpDelete]
+        public IActionResult DeleteDatableProduct(int? id)
+        {
+            var SilinecekIdGet = unitOfWork.Product.Get(x => x.Id == id);
+            if(SilinecekIdGet == null)
+            {
+                return Json(new { success = false, message = "Hata!! silinmiyor site sahibiyle iletişime geç!!" });
+                
+
+            }
+            
+            var eskiResim = Path.Combine(webHostEnvironment.WebRootPath, SilinecekIdGet.ImageUrl.TrimStart('\\'));   //Resmin uzantısını buluyor
+            if (System.IO.File.Exists(eskiResim))                                                               //Var olan resmi seçiyor
+            {
+                System.IO.File.Delete(eskiResim);                                                                   //Resmi kaldırıyor
+            }
+            unitOfWork.Product.Remove(SilinecekIdGet);
+            unitOfWork.Save();
+            return Json(new { success = true, message = "Ürün Başarıyla silindi" });
         }
         #endregion
     }
