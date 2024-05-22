@@ -20,7 +20,7 @@ namespace ETicaret.Model.Models
         public string ISBN { get; set; }
         [Required]
         public string Author { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Fiyat Bandı 1-1000 arasında olmalıdır!")]
         [Display(Name = "List Price")]
         [Range(1, 1000)]
         public double ListPrice { get; set; }
