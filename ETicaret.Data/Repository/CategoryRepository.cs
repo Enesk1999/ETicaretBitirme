@@ -19,7 +19,7 @@ namespace ETicaret.Data.Repository
 
         public void Update(Category category)
         {
-            applicationDbContext.Categoriler.Update(category);
+            applicationDbContext.Kategoriler.Update(category);
         }
     }
 }

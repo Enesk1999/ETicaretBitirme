@@ -1,11 +1,14 @@
 ﻿using ETicaret.Data.Repository;
 using ETicaret.Model;
+using ETicaret.Utility;
 using ETicaretWebUI.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ETicaretWebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles =SD.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork unitOfWork;

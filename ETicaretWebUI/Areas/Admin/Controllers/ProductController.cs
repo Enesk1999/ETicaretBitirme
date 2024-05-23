@@ -2,13 +2,16 @@
 using ETicaret.Model;
 using ETicaret.Model.Models;
 using ETicaret.Model.ViewModels;
+using ETicaret.Utility;
 using ETicaretWebUI.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ETicaretWebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles =SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork unitOfWork;

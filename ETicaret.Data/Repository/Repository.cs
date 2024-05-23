@@ -17,7 +17,7 @@ namespace ETicaret.Data.Repository
         {
             repository = rr;
             dbSet = repository.Set<T>();
-            repository.Products.Include(x => x.Category).Include(x=>x.CategoryId);
+            repository.Urunler.Include(x => x.Category).Include(x=>x.CategoryId);
 
         }
         public void Add(T entity)

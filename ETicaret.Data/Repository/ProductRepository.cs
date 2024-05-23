@@ -19,7 +19,7 @@ namespace ETicaret.Data.Repository
 
         public void Update(Product product)
         {
-            applicationDbContext.Products.Update(product);
+            applicationDbContext.Urunler.Update(product);
         }
      
     }

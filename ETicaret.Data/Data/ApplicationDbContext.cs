@@ -1,22 +1,26 @@
 ﻿
 using ETicaret.Model;
 using ETicaret.Model.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ETicaretWebUI.Data
 {
-    public class ApplicationDbContext:DbContext
+    public class ApplicationDbContext:IdentityDbContext<IdentityUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
         }
         
-        public DbSet<Category> Categoriler { get; set; }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Kategoriler { get; set; }
+        public DbSet<Product> Urunler { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id=1,Name="Aksiyon",DisplayOrder=1},
@@ -55,7 +59,7 @@ namespace ETicaretWebUI.Data
 
                 );
 
-            base.OnModelCreating(modelBuilder);
+            
         }
     }
 }
