@@ -60,6 +60,64 @@ namespace ETicaretWebUI.Data
 
                 );
 
+            modelBuilder.Entity<Company>().HasData(
+                new Company
+                {
+                    Id = 1,
+                    Name = "VivaDa",
+                    StreetAddress = "Yozgat Sk.",
+                    City = "Isparta",
+                    State = "Türkiye",
+                    PhoneNumber = "888666888",
+                    PostalCode = "064533"
+                },
+                new Company
+                {
+                    Id = 2,
+                    Name = "Sadık Tic. Aş.",
+                    StreetAddress = "Gaziosmanpaşa Sk.",
+                    City = "Konya",
+                    State = "Türkiye",
+                    PhoneNumber = "22334411",
+                    PostalCode = "0655544"
+                },
+                new Company
+                {
+                    Id = 3,
+                    Name = "Salazar Aş.",
+                    StreetAddress = "Yozgat Sk.",
+                    City = "Çorum",
+                    State = "Türkiye",
+                    PhoneNumber = "033221233",
+                    PostalCode = "064533"
+                },
+                new Company
+                {
+                    Id = 4,
+                    Name = "Clues&Clouddie",
+                    StreetAddress = "Beyaz Sk.",
+                    City = "İstanbul",
+                    State = "Türkiye",
+                    PhoneNumber = "888666888",
+                    PostalCode = "064533"
+                },
+                new Company
+                {
+                    Id = 5,
+                    Name = "Muhabbet",
+                    StreetAddress = "Kilis Sk.",
+                    City = "Ankara",
+                    State = "Türkiye",
+                    PhoneNumber = "5445544",
+                    PostalCode = "0453422"
+                }
+
+
+
+
+
+            );
+
             
         }
     }

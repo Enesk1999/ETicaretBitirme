@@ -53,7 +53,7 @@
                                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                             </div>
                             <div class="form-floating mb-3 col-md-12">
-                                <select class="form-select" asp-for="Input.Role" asp-items="@Model.Input.RoleList">
+                                <select class="form-select py-2" asp-for="Input.Role" asp-items="@Model.Input.RoleList">
                                     <option selected disabled>Lütfen Kullanıcı Rolünüzü Seçiniz</option>
                                 </select>
                             </div>
@@ -81,7 +81,11 @@
                                 <label asp-for="Input.PostalCode">Posta Kodu</label>
                                 <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
                             </div>
-                          
+                            <div class="form-floating mb-3 col-md-12">
+                                <select class="form-select py-2" style="display:none;" asp-for="Input.CompanyId" asp-items="@Model.Input.CompanyListe">
+                                    <option selected disabled>Lütfen Firma Seçiniz</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
@@ -95,4 +99,17 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $('#Input_Role').change(function () {
+                var selection = $('#Input_Role Option:Selected').text();
+                if (selection == 'Company') {
+                    $('#Input_CompanyId').show();
+                }
+                else {
+                    $('#Input_CompanyId').hide();
+                }
+            })
+        })
+    </script>
 }

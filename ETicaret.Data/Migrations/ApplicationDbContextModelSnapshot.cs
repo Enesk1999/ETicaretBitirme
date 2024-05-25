@@ -93,6 +93,58 @@ namespace ETicaret.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Firmalar");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            City = "Isparta",
+                            Name = "VivaDa",
+                            PhoneNumber = "888666888",
+                            PostalCode = "064533",
+                            State = "Türkiye",
+                            StreetAddress = "Yozgat Sk."
+                        },
+                        new
+                        {
+                            Id = 2,
+                            City = "Konya",
+                            Name = "Sadık Tic. Aş.",
+                            PhoneNumber = "22334411",
+                            PostalCode = "0655544",
+                            State = "Türkiye",
+                            StreetAddress = "Gaziosmanpaşa Sk."
+                        },
+                        new
+                        {
+                            Id = 3,
+                            City = "Çorum",
+                            Name = "Salazar Aş.",
+                            PhoneNumber = "033221233",
+                            PostalCode = "064533",
+                            State = "Türkiye",
+                            StreetAddress = "Yozgat Sk."
+                        },
+                        new
+                        {
+                            Id = 4,
+                            City = "İstanbul",
+                            Name = "Clues&Clouddie",
+                            PhoneNumber = "888666888",
+                            PostalCode = "064533",
+                            State = "Türkiye",
+                            StreetAddress = "Beyaz Sk."
+                        },
+                        new
+                        {
+                            Id = 5,
+                            City = "Ankara",
+                            Name = "Muhabbet",
+                            PhoneNumber = "5445544",
+                            PostalCode = "0453422",
+                            State = "Türkiye",
+                            StreetAddress = "Kilis Sk."
+                        });
                 });
 
             modelBuilder.Entity("ETicaret.Model.Models.Product", b =>
@@ -386,6 +438,9 @@ namespace ETicaret.Data.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CompanyId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -398,6 +453,8 @@ namespace ETicaret.Data.Migrations
 
                     b.Property<string>("StreetAddress")
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("CompanyId");
 
                     b.HasDiscriminator().HasValue("AppUser");
                 });
@@ -462,6 +519,15 @@ namespace ETicaret.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ETicaret.Model.Models.AppUser", b =>
+                {
+                    b.HasOne("ETicaret.Model.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId");
+
+                    b.Navigation("Company");
                 });
 #pragma warning restore 612, 618
         }

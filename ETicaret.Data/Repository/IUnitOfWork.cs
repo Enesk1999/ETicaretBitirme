@@ -10,6 +10,7 @@ namespace ETicaret.Data.Repository
     {
         ICategoryRepository Category { get; }
         IProductRepository Product { get; }
+        ICompanyRepository Company { get; }
         void Save();
     }
 }

@@ -12,11 +12,13 @@ namespace ETicaret.Data.Repository
         private readonly ApplicationDbContext applicationDbContext;
         public ICategoryRepository Category { get; private set; }
         public IProductRepository Product { get; private set; }
+        public ICompanyRepository Company { get; private set; }
         public UnitOfWork(ApplicationDbContext rr)
         {
             applicationDbContext = rr;
             Category = new CategoryRepository(applicationDbContext);
             Product = new ProductRepository(applicationDbContext);
+            Company = new CompanyRepository(applicationDbContext);
         }
 
         public void Save()

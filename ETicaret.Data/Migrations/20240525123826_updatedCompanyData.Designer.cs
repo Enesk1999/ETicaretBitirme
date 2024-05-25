@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ETicaret.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240524124836_dt")]
-    partial class dt
+    [Migration("20240525123826_updatedCompanyData")]
+    partial class updatedCompanyData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,6 +63,90 @@ namespace ETicaret.Data.Migrations
                             Id = 3,
                             DisplayOrder = 3,
                             Name = "Tarih"
+                        });
+                });
+
+            modelBuilder.Entity("ETicaret.Model.Models.Company", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StreetAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Firmalar");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            City = "Isparta",
+                            Name = "VivaDa",
+                            PhoneNumber = "888666888",
+                            PostalCode = "064533",
+                            State = "Türkiye",
+                            StreetAddress = "Yozgat Sk."
+                        },
+                        new
+                        {
+                            Id = 2,
+                            City = "Konya",
+                            Name = "Sadık Tic. Aş.",
+                            PhoneNumber = "22334411",
+                            PostalCode = "0655544",
+                            State = "Türkiye",
+                            StreetAddress = "Gaziosmanpaşa Sk."
+                        },
+                        new
+                        {
+                            Id = 3,
+                            City = "Çorum",
+                            Name = "Salazar Aş.",
+                            PhoneNumber = "033221233",
+                            PostalCode = "064533",
+                            State = "Türkiye",
+                            StreetAddress = "Yozgat Sk."
+                        },
+                        new
+                        {
+                            Id = 4,
+                            City = "İstanbul",
+                            Name = "Clues&Clouddie",
+                            PhoneNumber = "888666888",
+                            PostalCode = "064533",
+                            State = "Türkiye",
+                            StreetAddress = "Beyaz Sk."
+                        },
+                        new
+                        {
+                            Id = 5,
+                            City = "Ankara",
+                            Name = "Muhabbet",
+                            PhoneNumber = "5445544",
+                            PostalCode = "0453422",
+                            State = "Türkiye",
+                            StreetAddress = "Kilis Sk."
                         });
                 });
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ETicaret.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240522182236_AddUser")]
-    partial class AddUser
+    [Migration("20240525125008_AddNewProperties")]
+    partial class AddNewProperties
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,7 @@ namespace ETicaret.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categoriler");
+                    b.ToTable("Kategoriler");
 
                     b.HasData(
                         new
@@ -63,6 +63,90 @@ namespace ETicaret.Data.Migrations
                             Id = 3,
                             DisplayOrder = 3,
                             Name = "Tarih"
+                        });
+                });
+
+            modelBuilder.Entity("ETicaret.Model.Models.Company", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StreetAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Firmalar");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            City = "Isparta",
+                            Name = "VivaDa",
+                            PhoneNumber = "888666888",
+                            PostalCode = "064533",
+                            State = "Türkiye",
+                            StreetAddress = "Yozgat Sk."
+                        },
+                        new
+                        {
+                            Id = 2,
+                            City = "Konya",
+                            Name = "Sadık Tic. Aş.",
+                            PhoneNumber = "22334411",
+                            PostalCode = "0655544",
+                            State = "Türkiye",
+                            StreetAddress = "Gaziosmanpaşa Sk."
+                        },
+                        new
+                        {
+                            Id = 3,
+                            City = "Çorum",
+                            Name = "Salazar Aş.",
+                            PhoneNumber = "033221233",
+                            PostalCode = "064533",
+                            State = "Türkiye",
+                            StreetAddress = "Yozgat Sk."
+                        },
+                        new
+                        {
+                            Id = 4,
+                            City = "İstanbul",
+                            Name = "Clues&Clouddie",
+                            PhoneNumber = "888666888",
+                            PostalCode = "064533",
+                            State = "Türkiye",
+                            StreetAddress = "Beyaz Sk."
+                        },
+                        new
+                        {
+                            Id = 5,
+                            City = "Ankara",
+                            Name = "Muhabbet",
+                            PhoneNumber = "5445544",
+                            PostalCode = "0453422",
+                            State = "Türkiye",
+                            StreetAddress = "Kilis Sk."
                         });
                 });
 
@@ -112,7 +196,7 @@ namespace ETicaret.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Urunler");
 
                     b.HasData(
                         new
@@ -207,6 +291,11 @@ namespace ETicaret.Data.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -258,6 +347,10 @@ namespace ETicaret.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -288,12 +381,10 @@ namespace ETicaret.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -330,12 +421,10 @@ namespace ETicaret.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -343,6 +432,34 @@ namespace ETicaret.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("ETicaret.Model.Models.AppUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StreetAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasDiscriminator().HasValue("AppUser");
                 });
 
             modelBuilder.Entity("ETicaret.Model.Models.Product", b =>
@@ -405,6 +522,17 @@ namespace ETicaret.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ETicaret.Model.Models.AppUser", b =>
+                {
+                    b.HasOne("ETicaret.Model.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
                 });
 #pragma warning restore 612, 618
         }
