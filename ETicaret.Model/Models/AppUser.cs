@@ -10,8 +10,8 @@ namespace ETicaret.Model.Models
 {
     public class AppUser:IdentityUser
     {
-        [Required]
-        public int? Name {  get; set; }
+        [Required(ErrorMessage ="Kullanıcı Adını Girmek zorundasınız")]
+        public string Name {  get; set; }
         public string? StreetAddress {  get; set; }
         public string? City {  get; set; }
         public string? State {  get; set; }

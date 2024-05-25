@@ -17,6 +17,7 @@ namespace ETicaretWebUI.Data
         public DbSet<Category> Kategoriler { get; set; }
         public DbSet<Product> Urunler { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<Company> Firmalar { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

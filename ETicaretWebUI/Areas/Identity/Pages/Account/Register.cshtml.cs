@@ -80,19 +80,19 @@ namespace ETicaretWebUI.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [EmailAddress]
-            [Display(Name = "Email")]
+            [Required(ErrorMessage ="Lütfen Eposta adresinizi giriniz")]
+            [EmailAddress(ErrorMessage ="Geçerli e-posta adresi giriniz!")]
+            [Display(Name = "Eposta")]
             public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage ="Lütfen parola giriniz")]
+            [StringLength(100, ErrorMessage = "Parola en az 1 tane büyük karakter, özel kaarakter ve küçük harf içermelidir parola uzunluğu 6' dan kısa olamaz", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Parola")]
             public string Password { get; set; }
 
             /// <summary>
@@ -101,11 +101,19 @@ namespace ETicaretWebUI.Areas.Identity.Pages.Account
             /// </summary>
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "Parola ile doğralama parolası aynı olmalıdır ")]
             public string ConfirmPassword { get; set; }
 
             public string? Role { get; set; }
             public IEnumerable<SelectListItem> RoleList { get; set; }
+
+            [Required(ErrorMessage ="Lütfen Kullanıcı Adını Boş Bırakmayınız!!")]
+            public string Name { get; set; }
+            public string? StreetAddress { get; set; }
+            public string? City { get; set; }
+            public string? State { get; set; }
+            public string? PostalCode { get; set; }
+            public string? PhoneNumber { get; set; }
         }   
 
 
@@ -139,6 +147,13 @@ namespace ETicaretWebUI.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
+                user.Name = Input.Name;
+                user.StreetAddress = Input.StreetAddress;
+                user.City = Input.City;
+                user.State = Input.State;
+                user.PostalCode = Input.PostalCode;
+                user.PhoneNumber = Input.PhoneNumber;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
